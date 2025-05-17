@@ -4,7 +4,7 @@ import styles from "./UserList.module.css";
 const UserList = (props) => {
     return (
         // Пропс className может быть назван произвольно
-        <Card className={styles.users}>
+        props.users.length !== 0 && (<Card className={styles.users}>
             <ul>
                 {props.users.map((user) => (
                     <li key={user.id}>
@@ -12,7 +12,7 @@ const UserList = (props) => {
                     </li>
                 ))}
             </ul>
-        </Card>
+        </Card>)
     );
 };
 

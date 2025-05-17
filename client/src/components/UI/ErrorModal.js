@@ -6,7 +6,7 @@ const ErrorModal = (props) => {
     return (
         <div>
             {/* затемнение под модальным окном */}
-            <div className={styles.backdrop}></div>
+            <div className={styles.backdrop} onClick={props.onCloseModal}></div>
 
             <Card className={styles.modal}>
                 <header className={styles.header}>
@@ -16,7 +16,7 @@ const ErrorModal = (props) => {
                     <p>{props.message}</p>
                 </div>
                 <footer className={styles.actions}>
-                    <Button>Закрыть</Button>
+                    <Button onClick={props.onCloseModal}>Закрыть</Button>
                 </footer>
             </Card>
         </div>
