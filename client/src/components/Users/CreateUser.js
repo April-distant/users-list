@@ -20,7 +20,8 @@ const CreateUser = (props) => {
         //     return;
         // }
 
-        console.log(inputName, inputAge);
+        // console.log(inputName, inputAge);
+        props.onCreateUser(inputName, inputAge);
         // При этом надо инпуты сделать зависимыми от состояний компонента через value.
         setInputName("");
         setInputAge("");
