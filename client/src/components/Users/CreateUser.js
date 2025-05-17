@@ -2,6 +2,7 @@ import { useState } from "react";
 import Card from "../UI/Card";
 import styles from "./CreateUser.module.css";
 import Button from "../UI/Button";
+import ErrorModal from "../UI/ErrorModal";
 
 const CreateUser = (props) => {
 
@@ -36,26 +37,30 @@ const CreateUser = (props) => {
     };
 
     return (
-        <Card className={styles.input}>
-            <form onSubmit={createUserHandler}>
-                <label htmlFor="name">Имя</label>
-                <input
-                    id="name"
-                    type="text"
-                    onChange={nameChangeHandler}
-                    value={inputName} />
-                {/* onChange - возникнет только когда измененный элемент потеряет фокус */}
+        <>
+            <ErrorModal title="Произошла Ошибка!" message="Что-то пошло не так..." />
 
-                <label htmlFor="age">Возраст</label>
-                <input
-                    id="age"
-                    type="number"
-                    onChange={ageChangeHandler}
-                    value={inputAge} />
-                {/* <button type="submit">Добавить Пользователя</button> */}
-                <Button type="submit">Добавить Пользователя</Button>
-            </form>
-        </Card>
+            <Card className={styles.input}>
+                <form onSubmit={createUserHandler}>
+                    <label htmlFor="name">Имя</label>
+                    <input
+                        id="name"
+                        type="text"
+                        onChange={nameChangeHandler}
+                        value={inputName} />
+                    {/* onChange - возникнет только когда измененный элемент потеряет фокус */}
+
+                    <label htmlFor="age">Возраст</label>
+                    <input
+                        id="age"
+                        type="number"
+                        onChange={ageChangeHandler}
+                        value={inputAge} />
+                    {/* <button type="submit">Добавить Пользователя</button> */}
+                    <Button type="submit">Добавить Пользователя</Button>
+                </form>
+            </Card>
+        </>
     );
 };
 
