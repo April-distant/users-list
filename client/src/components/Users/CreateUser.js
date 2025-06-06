@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Card from "../UI/Card";
 import styles from "./CreateUser.module.css";
 import Button from "../UI/Button";
@@ -9,6 +9,16 @@ const CreateUser = (props) => {
     const [inputName, setInputName] = useState("");
     const [inputAge, setInputAge] = useState("");
     const [error, setError] = useState();
+
+    useEffect(() => {
+        fetch('http://localhost:4000/users')
+            .then(data => { return data.json() })
+            .then(users => {
+                props.onGetUsers(users);
+            })
+            .catch(err => console.log('Ошибка', err))
+    }, [])
+
 
     const createUserHandler = (event) => {
         event.preventDefault();
@@ -32,8 +42,26 @@ const CreateUser = (props) => {
         }
 
         // console.log(inputName, inputAge);
-        props.onCreateUser(inputName, inputAge);
+        // props.onCreateUser(inputName, inputAge);
         // При этом надо инпуты сделать зависимыми от состояний компонента через value.
+
+        fetch('http://localhost:4000/user', {
+            method: 'POST',
+            body: JSON.stringify({
+                name: inputName,
+                age: inputAge
+            }),
+            headers: { 'Content-Type': 'application/json' }
+
+        }).then(() => {
+            fetch('http://localhost:4000/users')
+                .then(data => { return data.json() })
+                .then(users => {
+                    props.onGetUsers(users);
+                })
+                .catch(err => console.log('Ошибка', err))
+        })
+
         setInputName("");
         setInputAge("");
     };

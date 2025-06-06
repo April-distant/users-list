@@ -5,26 +5,12 @@ import UserList from "./components/Users/UserList";
 const App = () => {
   const [userList, setUserList] = useState([]);
 
-  const createUserHandler = (name, age) => {
-    // Обновляем старое состояние
-    // В setUserList передаём функцию с предыдущим состоянием 
-    // Свойство prevUserList может иметь любое название
-    setUserList((prevUserList) => {
-      return [
-        ...prevUserList,
-        // id: Date.now()
-        {
-          name: name,
-          age: age,
-          id: Date.now(),
-          // id: Math.random().toString()
-        },
-      ];
-    });
+  const getUserHandler = (user) => {
+    setUserList(user)
   };
   return (
     <div>
-      <CreateUser onCreateUser={createUserHandler} />
+      <CreateUser onGetUsers={getUserHandler} />
       <UserList users={userList} />
     </div>
   );
